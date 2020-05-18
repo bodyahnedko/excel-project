@@ -3,10 +3,10 @@ const CODES = {
 	Z: 90
 };
 
-function createRow(cols, rowNumber = '') {
+function createRow(cols, index = '') {
 	return `
 		<div class="row">
-			<div class="row-info">${rowNumber}</div>
+			<div class="row-info">${index}</div>
 			<div class="row-data">${cols}</div>
 		</div>
 	`;
@@ -24,7 +24,7 @@ function createCell() {
 	`;
 }
 
-function toChar(el, index) {
+function toChar(_, index) {
 	return String.fromCharCode(CODES.A + index);
 }
 
@@ -45,8 +45,8 @@ export function createTable(rowCount = 15) {
 
 	rows.push(createRow(cols));
 
-	for (let i = 1; i <= rowCount; i++) {
-		rows.push(createRow(cels, i));
+	for (let i = 0; i < rowCount; i++) {
+		rows.push(createRow(cels, i + 1));
 	}
 
 	return rows.join('');
