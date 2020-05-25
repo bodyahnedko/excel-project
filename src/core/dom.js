@@ -34,13 +34,44 @@ class Dom {
 		this.$el.append(node);
 		return this;
 	}
+
+	closest(selector) {
+		return $(this.$el.closest(selector));
+	}
+
+	get data() {
+		return this.$el.dataset;
+	}
+
+	getCoords() {
+		return this.$el.getBoundingClientRect();
+	}
+
+	findAll(selector) {
+		return this.$el.querySelectorAll(selector);
+	}
+
+	find(selector) {
+		return $(this.$el.querySelector(selector));
+	}
+
+	css(styles = {}) {
+		// return Object.keys(styles).map(attr => {
+		// 	this.$el.style[attr] = styles[attr];
+		// });
+		Object.assign(this.$el.style, styles);
+	}
+
+	remove() {
+		this.$el.remove();
+	}
 }
 
 export function $(selector) {
 	return new Dom(selector);
 }
 
-$.create = (tagName, classes = []) => {
+$.create = (tagName, classes = '') => {
 	const el = document.createElement(tagName);
 	if (classes.length) {
 		el.classList.add(classes);

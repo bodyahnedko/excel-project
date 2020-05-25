@@ -13,6 +13,7 @@
         "arrow-parens": 0,
         "eol-last": 0,
         "comma-dangle": 0,
-        "require-jsdoc": 0
+		"require-jsdoc": 0,
+		"max-len": 0
     }
 }

@@ -4,23 +4,30 @@ const CODES = {
 };
 
 function createRow(cols, index = '') {
+	const resizer = index ? `<div class="row-resize" data-resize="row"></div>` : '';
 	return `
-		<div class="row">
-			<div class="row-info">${index}</div>
-			<div class="row-data">${cols}</div>
+		<div class="row js-resizer-wrap">
+			<div class="row-info">
+				${index}
+				${resizer}
+			</div>
+			<div class="row-data js-row">${cols}</div>
 		</div>
 	`;
 }
 
-function createCol(char) {
+function createCol(char, index) {
 	return `
-		<div class="column">${char}</div>
+		<div class="column js-resizer-wrap" data-index="${index}">
+			${char}
+			<div class="col-resize" data-resize="col"></div>
+		</div>
 	`;
 }
 
-function createCell() {
+function createCell(_, index) {
 	return `
-		<div class="cell" contenteditable></div>
+		<div class="cell js-cell" contenteditable data-index="${index}"></div>
 	`;
 }
 
