@@ -25,10 +25,16 @@ function createCol(char, index) {
 	`;
 }
 
-function createCell(_, index) {
-	return `
-		<div class="cell js-cell" contenteditable data-index="${index}"></div>
-	`;
+function createCell(rowIndex) {
+	return function(_, index) {
+		return `
+			<div class="cell js-cell" 
+				contenteditable 
+				data-index="${index}"
+				data-id="${rowIndex}:${index}"
+			></div>
+		`;
+	};
 }
 
 function toChar(_, index) {
@@ -45,14 +51,14 @@ export function createTable(rowCount = 15) {
 		.map(createCol)
 		.join('');
 
-	const cels = Array(colCount)
-		.fill('')
-		.map(createCell)
-		.join('');
-
 	rows.push(createRow(cols));
 
 	for (let i = 0; i < rowCount; i++) {
+		const cels = Array(colCount)
+			.fill('')
+			.map(createCell(i))
+			.join('');
+
 		rows.push(createRow(cels, i + 1));
 	}
 
