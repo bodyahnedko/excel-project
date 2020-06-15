@@ -14,6 +14,10 @@ class Dom {
 		}
 	}
 
+	text(text) {
+		return this.$el.textContent = text;
+	}
+
 	clear() {
 		this.$el.innerHTML = '';
 		return this;
@@ -53,6 +57,22 @@ class Dom {
 
 	find(selector) {
 		return $(this.$el.querySelector(selector));
+	}
+
+	focus() {
+		this.$el.focus();
+		return this;
+	}
+
+	id(parse) {
+		if (parse) {
+			const parsed = this.id().split(':');
+			return {
+				row: +parsed[0],
+				col: +parsed[1]
+			};
+		}
+		return this.data.id;
 	}
 
 	css(styles = {}) {
